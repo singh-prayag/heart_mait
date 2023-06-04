@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block header %}
+<h2 class="text-danger">Register a new account.</h2>
+{% endblock header %}
+
+{% block content %}
+
+  <form method='POST' action="{% url 'users:register' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% buttons %}
+    <button name="submit" class="btn btn-danger">register</button>
+    {% endbuttons %}
+
+    <input type="hidden" name="next" value="{% url 'heartML:survey' %}" />
+  </form>
+
+{% endblock content %}

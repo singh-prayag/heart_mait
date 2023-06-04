@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+<div class="container">
+  <div class="jumbotron" style="background-color:#ebaeb1;">
+    <!-- <img class="demo-bg" src="https://www.maycocolors.com/wp-content/uploads/2020/09/ss-141.jpg" alt=""> -->
+    <h1 class="display-4">Do your part, care for your heart.</h1>
+    <p class="lead">HeartML allows you to skip waiting lines to receive a quick diagnosis for heart disease.</p>
+    <hr class="my-4">
+    <p>With our AI-based prediction model, we use 17 health factors to determine your risk of developing heart disease.</p>
+    <p class="lead">
+      <a class="btn btn-danger btn-lg" href="{% url 'heartML:pred' %}" role="button">Learn more</a>
+    </p>
+  </div>
+
+  {% load static %}
+<style type="text/css">
+
+  body {
+      /* background-image: url("{% static 'background-image-lol.jpg' %}"); */
+      background-repeat: no-repeat, repeat;
+      background-position: center;
+      background-size: cover;
+  }
+
+  .demo-bg {
+    opacity: 0.23;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .jumbotron {
+      background-repeat: no-repeat, repeat;
+      background-size: cover; 
+      overflow: hidden;
+      position: relative;
+      font-weight: bold;
+      box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  }
+
+</style> 
+  
+</div>
+{% endblock header %}
+
+{% block content %}
+  <h2>
+    {% if user.is_authenticated %}
+      <a href="{% url 'heartML:pred' %}" class="text-danger">Determine your risk</a> for heart disease and improve your health one day at a time. 
+    {% else %} 
+     <a href="{% url 'users:register' %}" class="text-danger">Register an account</a> to determine your risk for heart disease and improve your health one day at a time.
+    {% endif %}
+  </h2>
+  <h2>
+   Get personalized health goals to decrease your risk for developing heart disease. 
+  </h2>
+{% endblock content %}
+
+

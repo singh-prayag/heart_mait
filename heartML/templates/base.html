@@ -1,0 +1,102 @@
+{% load bootstrap3 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+  <head>
+    <meta charset="utf-8"
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+
+    <title>HeartML</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+  </head>
+
+  <body>
+
+    <!--Static navbar-->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed"
+            data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
+          </button>
+        </div>
+
+  
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><img src="{% static 'images/logo-transparent-png.png' %}" height="65px" width="65px"></li>
+            <li><a href="{% url 'heartML:index' %}">Home</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'heartML:pred' %}">Prediction</a></li>
+              <li><a href="{% url 'heartML:goals' %}">Personal Goals</a></li>
+            {% endif %}
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li><a>Hello, {{ user.username }}.</a></li>
+              <li><a href="{% url 'users:logout' %}">Logout</a></li>
+            {% else %}
+              <li><a href="{% url 'users:login' %}">Login</a></li>
+              <li><a href="{% url 'users:register' %}">Register</a></li>
+            {% endif %}
+          </ul>
+        </div><!--/.nav-collapse-->
+
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="page-header">
+        {% block header %}{% endblock header %} <!--NOTICE THAT THIS IS FOR THE JUMBOTRON-->
+      </div>
+      <div class="cont">
+        {% block content %}{% endblock content %} <!--NOTICE THAT THIS IS FOR THE CONTENT-->
+      </div>
+
+    </div>
+
+  </body>
+</html>
+
+<style>
+  .navbar {
+  min-height: 80px;
+  }
+
+.navbar-brand {
+  padding: 0 15px;
+  height: 80px;
+  line-height: 80px;
+}
+
+.navbar-toggle {
+  /* (80px - button height 34px) / 2 = 23px */
+  margin-top: 23px;
+  padding: 9px 10px !important;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    /* (80px - line-height of 27px) / 2 = 26.5px */
+    padding-top: 25px;
+    padding-bottom: 25px;
+    line-height: 30px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+</style> 
+
+
